@@ -1,8 +1,10 @@
-import { createFileRoute, redirect } from '@tanstack/react-router'
+import { createFileRoute } from '@tanstack/react-router'
+import { Signup } from '~/components/Signup'
 
 export const Route = createFileRoute('/signup')({
-  beforeLoad: () => {
-    // Redirect to login since Authenticator handles both sign-in and sign-up
-    throw redirect({ to: '/login' })
-  },
+  component: SignupComponent,
 })
+
+function SignupComponent() {
+  return <Signup />
+}

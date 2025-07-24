@@ -10,18 +10,38 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as SignupRouteImport } from './routes/signup'
+import { Route as SearchRouteImport } from './routes/search'
+import { Route as ResetPasswordRouteImport } from './routes/reset-password'
 import { Route as LogoutRouteImport } from './routes/logout'
 import { Route as LoginRouteImport } from './routes/login'
 import { Route as AuthedRouteImport } from './routes/_authed'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as ListingsIndexRouteImport } from './routes/listings/index'
+import { Route as CategoriesIndexRouteImport } from './routes/categories/index'
+import { Route as ListingsSubmitRouteImport } from './routes/listings/submit'
+import { Route as ListingsListingIdRouteImport } from './routes/listings/$listingId'
+import { Route as CategoriesCategorySlugRouteImport } from './routes/categories/$categorySlug'
+import { Route as AuthedProfileRouteImport } from './routes/_authed/profile'
+import { Route as AuthedAdminRouteImport } from './routes/_authed/admin'
 import { Route as AuthedPostsRouteRouteImport } from './routes/_authed/posts.route'
 import { Route as AuthedPostsIndexRouteImport } from './routes/_authed/posts.index'
+import { Route as AuthedAdminIndexRouteImport } from './routes/_authed/admin/index'
 import { Route as AuthedPostsNewRouteImport } from './routes/_authed/posts.new'
 import { Route as AuthedPostsPostIdRouteImport } from './routes/_authed/posts.$postId'
 
 const SignupRoute = SignupRouteImport.update({
   id: '/signup',
   path: '/signup',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SearchRoute = SearchRouteImport.update({
+  id: '/search',
+  path: '/search',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ResetPasswordRoute = ResetPasswordRouteImport.update({
+  id: '/reset-password',
+  path: '/reset-password',
   getParentRoute: () => rootRouteImport,
 } as any)
 const LogoutRoute = LogoutRouteImport.update({
@@ -43,6 +63,41 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ListingsIndexRoute = ListingsIndexRouteImport.update({
+  id: '/listings/',
+  path: '/listings/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CategoriesIndexRoute = CategoriesIndexRouteImport.update({
+  id: '/categories/',
+  path: '/categories/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ListingsSubmitRoute = ListingsSubmitRouteImport.update({
+  id: '/listings/submit',
+  path: '/listings/submit',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ListingsListingIdRoute = ListingsListingIdRouteImport.update({
+  id: '/listings/$listingId',
+  path: '/listings/$listingId',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CategoriesCategorySlugRoute = CategoriesCategorySlugRouteImport.update({
+  id: '/categories/$categorySlug',
+  path: '/categories/$categorySlug',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AuthedProfileRoute = AuthedProfileRouteImport.update({
+  id: '/profile',
+  path: '/profile',
+  getParentRoute: () => AuthedRoute,
+} as any)
+const AuthedAdminRoute = AuthedAdminRouteImport.update({
+  id: '/admin',
+  path: '/admin',
+  getParentRoute: () => AuthedRoute,
+} as any)
 const AuthedPostsRouteRoute = AuthedPostsRouteRouteImport.update({
   id: '/posts',
   path: '/posts',
@@ -52,6 +107,11 @@ const AuthedPostsIndexRoute = AuthedPostsIndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => AuthedPostsRouteRoute,
+} as any)
+const AuthedAdminIndexRoute = AuthedAdminIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => AuthedAdminRoute,
 } as any)
 const AuthedPostsNewRoute = AuthedPostsNewRouteImport.update({
   id: '/new',
@@ -68,19 +128,38 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/login': typeof LoginRoute
   '/logout': typeof LogoutRoute
+  '/reset-password': typeof ResetPasswordRoute
+  '/search': typeof SearchRoute
   '/signup': typeof SignupRoute
   '/posts': typeof AuthedPostsRouteRouteWithChildren
+  '/admin': typeof AuthedAdminRouteWithChildren
+  '/profile': typeof AuthedProfileRoute
+  '/categories/$categorySlug': typeof CategoriesCategorySlugRoute
+  '/listings/$listingId': typeof ListingsListingIdRoute
+  '/listings/submit': typeof ListingsSubmitRoute
+  '/categories': typeof CategoriesIndexRoute
+  '/listings': typeof ListingsIndexRoute
   '/posts/$postId': typeof AuthedPostsPostIdRoute
   '/posts/new': typeof AuthedPostsNewRoute
+  '/admin/': typeof AuthedAdminIndexRoute
   '/posts/': typeof AuthedPostsIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/login': typeof LoginRoute
   '/logout': typeof LogoutRoute
+  '/reset-password': typeof ResetPasswordRoute
+  '/search': typeof SearchRoute
   '/signup': typeof SignupRoute
+  '/profile': typeof AuthedProfileRoute
+  '/categories/$categorySlug': typeof CategoriesCategorySlugRoute
+  '/listings/$listingId': typeof ListingsListingIdRoute
+  '/listings/submit': typeof ListingsSubmitRoute
+  '/categories': typeof CategoriesIndexRoute
+  '/listings': typeof ListingsIndexRoute
   '/posts/$postId': typeof AuthedPostsPostIdRoute
   '/posts/new': typeof AuthedPostsNewRoute
+  '/admin': typeof AuthedAdminIndexRoute
   '/posts': typeof AuthedPostsIndexRoute
 }
 export interface FileRoutesById {
@@ -89,10 +168,20 @@ export interface FileRoutesById {
   '/_authed': typeof AuthedRouteWithChildren
   '/login': typeof LoginRoute
   '/logout': typeof LogoutRoute
+  '/reset-password': typeof ResetPasswordRoute
+  '/search': typeof SearchRoute
   '/signup': typeof SignupRoute
   '/_authed/posts': typeof AuthedPostsRouteRouteWithChildren
+  '/_authed/admin': typeof AuthedAdminRouteWithChildren
+  '/_authed/profile': typeof AuthedProfileRoute
+  '/categories/$categorySlug': typeof CategoriesCategorySlugRoute
+  '/listings/$listingId': typeof ListingsListingIdRoute
+  '/listings/submit': typeof ListingsSubmitRoute
+  '/categories/': typeof CategoriesIndexRoute
+  '/listings/': typeof ListingsIndexRoute
   '/_authed/posts/$postId': typeof AuthedPostsPostIdRoute
   '/_authed/posts/new': typeof AuthedPostsNewRoute
+  '/_authed/admin/': typeof AuthedAdminIndexRoute
   '/_authed/posts/': typeof AuthedPostsIndexRoute
 }
 export interface FileRouteTypes {
@@ -101,19 +190,38 @@ export interface FileRouteTypes {
     | '/'
     | '/login'
     | '/logout'
+    | '/reset-password'
+    | '/search'
     | '/signup'
     | '/posts'
+    | '/admin'
+    | '/profile'
+    | '/categories/$categorySlug'
+    | '/listings/$listingId'
+    | '/listings/submit'
+    | '/categories'
+    | '/listings'
     | '/posts/$postId'
     | '/posts/new'
+    | '/admin/'
     | '/posts/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
     | '/login'
     | '/logout'
+    | '/reset-password'
+    | '/search'
     | '/signup'
+    | '/profile'
+    | '/categories/$categorySlug'
+    | '/listings/$listingId'
+    | '/listings/submit'
+    | '/categories'
+    | '/listings'
     | '/posts/$postId'
     | '/posts/new'
+    | '/admin'
     | '/posts'
   id:
     | '__root__'
@@ -121,10 +229,20 @@ export interface FileRouteTypes {
     | '/_authed'
     | '/login'
     | '/logout'
+    | '/reset-password'
+    | '/search'
     | '/signup'
     | '/_authed/posts'
+    | '/_authed/admin'
+    | '/_authed/profile'
+    | '/categories/$categorySlug'
+    | '/listings/$listingId'
+    | '/listings/submit'
+    | '/categories/'
+    | '/listings/'
     | '/_authed/posts/$postId'
     | '/_authed/posts/new'
+    | '/_authed/admin/'
     | '/_authed/posts/'
   fileRoutesById: FileRoutesById
 }
@@ -133,7 +251,14 @@ export interface RootRouteChildren {
   AuthedRoute: typeof AuthedRouteWithChildren
   LoginRoute: typeof LoginRoute
   LogoutRoute: typeof LogoutRoute
+  ResetPasswordRoute: typeof ResetPasswordRoute
+  SearchRoute: typeof SearchRoute
   SignupRoute: typeof SignupRoute
+  CategoriesCategorySlugRoute: typeof CategoriesCategorySlugRoute
+  ListingsListingIdRoute: typeof ListingsListingIdRoute
+  ListingsSubmitRoute: typeof ListingsSubmitRoute
+  CategoriesIndexRoute: typeof CategoriesIndexRoute
+  ListingsIndexRoute: typeof ListingsIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -143,6 +268,20 @@ declare module '@tanstack/react-router' {
       path: '/signup'
       fullPath: '/signup'
       preLoaderRoute: typeof SignupRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/search': {
+      id: '/search'
+      path: '/search'
+      fullPath: '/search'
+      preLoaderRoute: typeof SearchRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/reset-password': {
+      id: '/reset-password'
+      path: '/reset-password'
+      fullPath: '/reset-password'
+      preLoaderRoute: typeof ResetPasswordRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/logout': {
@@ -173,6 +312,55 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/listings/': {
+      id: '/listings/'
+      path: '/listings'
+      fullPath: '/listings'
+      preLoaderRoute: typeof ListingsIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/categories/': {
+      id: '/categories/'
+      path: '/categories'
+      fullPath: '/categories'
+      preLoaderRoute: typeof CategoriesIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/listings/submit': {
+      id: '/listings/submit'
+      path: '/listings/submit'
+      fullPath: '/listings/submit'
+      preLoaderRoute: typeof ListingsSubmitRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/listings/$listingId': {
+      id: '/listings/$listingId'
+      path: '/listings/$listingId'
+      fullPath: '/listings/$listingId'
+      preLoaderRoute: typeof ListingsListingIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/categories/$categorySlug': {
+      id: '/categories/$categorySlug'
+      path: '/categories/$categorySlug'
+      fullPath: '/categories/$categorySlug'
+      preLoaderRoute: typeof CategoriesCategorySlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/_authed/profile': {
+      id: '/_authed/profile'
+      path: '/profile'
+      fullPath: '/profile'
+      preLoaderRoute: typeof AuthedProfileRouteImport
+      parentRoute: typeof AuthedRoute
+    }
+    '/_authed/admin': {
+      id: '/_authed/admin'
+      path: '/admin'
+      fullPath: '/admin'
+      preLoaderRoute: typeof AuthedAdminRouteImport
+      parentRoute: typeof AuthedRoute
+    }
     '/_authed/posts': {
       id: '/_authed/posts'
       path: '/posts'
@@ -186,6 +374,13 @@ declare module '@tanstack/react-router' {
       fullPath: '/posts/'
       preLoaderRoute: typeof AuthedPostsIndexRouteImport
       parentRoute: typeof AuthedPostsRouteRoute
+    }
+    '/_authed/admin/': {
+      id: '/_authed/admin/'
+      path: '/'
+      fullPath: '/admin/'
+      preLoaderRoute: typeof AuthedAdminIndexRouteImport
+      parentRoute: typeof AuthedAdminRoute
     }
     '/_authed/posts/new': {
       id: '/_authed/posts/new'
@@ -219,12 +414,28 @@ const AuthedPostsRouteRouteChildren: AuthedPostsRouteRouteChildren = {
 const AuthedPostsRouteRouteWithChildren =
   AuthedPostsRouteRoute._addFileChildren(AuthedPostsRouteRouteChildren)
 
+interface AuthedAdminRouteChildren {
+  AuthedAdminIndexRoute: typeof AuthedAdminIndexRoute
+}
+
+const AuthedAdminRouteChildren: AuthedAdminRouteChildren = {
+  AuthedAdminIndexRoute: AuthedAdminIndexRoute,
+}
+
+const AuthedAdminRouteWithChildren = AuthedAdminRoute._addFileChildren(
+  AuthedAdminRouteChildren,
+)
+
 interface AuthedRouteChildren {
   AuthedPostsRouteRoute: typeof AuthedPostsRouteRouteWithChildren
+  AuthedAdminRoute: typeof AuthedAdminRouteWithChildren
+  AuthedProfileRoute: typeof AuthedProfileRoute
 }
 
 const AuthedRouteChildren: AuthedRouteChildren = {
   AuthedPostsRouteRoute: AuthedPostsRouteRouteWithChildren,
+  AuthedAdminRoute: AuthedAdminRouteWithChildren,
+  AuthedProfileRoute: AuthedProfileRoute,
 }
 
 const AuthedRouteWithChildren =
@@ -235,7 +446,14 @@ const rootRouteChildren: RootRouteChildren = {
   AuthedRoute: AuthedRouteWithChildren,
   LoginRoute: LoginRoute,
   LogoutRoute: LogoutRoute,
+  ResetPasswordRoute: ResetPasswordRoute,
+  SearchRoute: SearchRoute,
   SignupRoute: SignupRoute,
+  CategoriesCategorySlugRoute: CategoriesCategorySlugRoute,
+  ListingsListingIdRoute: ListingsListingIdRoute,
+  ListingsSubmitRoute: ListingsSubmitRoute,
+  CategoriesIndexRoute: CategoriesIndexRoute,
+  ListingsIndexRoute: ListingsIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

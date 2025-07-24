@@ -1,0 +1,9 @@
+{
+  "name": "stripe-payment",
+  "version": "1.0.0",
+  "type": "module",
+  "dependencies": {
+    "stripe": "^14.21.0",
+    "aws-amplify": "^6.0.0"
+  }
+}

@@ -1,0 +1,8 @@
+{
+  "name": "ad-expiration",
+  "version": "1.0.0",
+  "type": "module",
+  "dependencies": {
+    "aws-amplify": "^6.0.0"
+  }
+}

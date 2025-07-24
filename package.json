@@ -31,6 +31,8 @@
     "dev": "vite dev",
     "build": "vite build",
     "start": "vite start",
+    "test": "vitest",
+    "test:run": "vitest run",
     "amplify:sandbox": "npx ampx sandbox",
     "amplify:deploy": "npx ampx deploy",
     "amplify:generate": "npx ampx generate outputs --app-id <your-app-id> --branch main"

@@ -1,0 +1,9 @@
+{
+  "name": "content-moderation",
+  "version": "1.0.0",
+  "type": "module",
+  "dependencies": {
+    "@aws-sdk/client-comprehend": "^3.0.0",
+    "@aws-sdk/client-rekognition": "^3.0.0"
+  }
+}
